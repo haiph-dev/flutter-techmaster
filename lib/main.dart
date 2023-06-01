@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'p02Excercise01/statistics.dart';
+import 'p03Excercise01/flag.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const StatsPage(),
+      home: const FlagPage(),
     );
   }
 }
