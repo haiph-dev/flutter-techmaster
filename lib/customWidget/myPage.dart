@@ -22,8 +22,15 @@ class MyPage extends StatelessWidget {
               controller: nameController,
               textCapitalization: TextCapitalization.words,
               textInputType: TextInputType.text,
+              obscureText: false,
             ),
-            myTextField(controller: bodController, text)
+            myTextField(
+              controller: nameController,
+              textCapitalization: TextCapitalization.words,
+              textInputType: TextInputType.text,
+              obscureText: false,
+            )
+            // myTextField(controller: bodController, text)
           ],
         ),
       ),

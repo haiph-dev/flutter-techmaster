@@ -7,7 +7,7 @@ class myTextField extends StatelessWidget {
   final TextInputType textInputType;
   final TextCapitalization? textCapitalization;
   final Widget? suffixIcon;
-  final bool? obscureText = false;
+  final bool obscureText;
 
   const myTextField(
       {super.key,
@@ -17,15 +17,18 @@ class myTextField extends StatelessWidget {
       required this.textInputType,
       required this.textCapitalization,
       this.suffixIcon,
-      this.obscureText;
-      });
+      required this.obscureText});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-      color: Colors.blue,
-      child: TextField(controller: controller),
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.blue,
+        ),
+        child: TextField(controller: controller),
+      ),
+    ]);
   }
 }
