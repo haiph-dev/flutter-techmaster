@@ -15,7 +15,9 @@ Future<List<User>> fetchUsers(http.Client client) async {
 
 List<User> parseUsers(String responseBody) {
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  return parsed.map<User>((json) => User.fromJson(json)).toList();
+  List<User> temp = parsed.map<User>((json) => User.fromJson(json)).toList();
+  print(temp.toString());
+  return temp;
 }
 
 //build page
