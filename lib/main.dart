@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'customWidget/myPage.dart';
+import 'listview/listViewDemo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,10 +30,19 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: MyPage(),
+      home: const MyPage(),
     );
+  }
+}
+
+class MyPage extends StatelessWidget {
+  const MyPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const ListViewDemo();
   }
 }
