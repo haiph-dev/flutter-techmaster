@@ -9,14 +9,14 @@ import 'user/user.dart';
 Future<List<User>> fetchUsers(http.Client client) async {
   final response =
       await client.get(Uri.parse('http://api.quynhtao.com/api/users'));
-  print(response.body);
+  // print(response.body);
   return compute(parseUsers, response.body);
 }
 
 List<User> parseUsers(String responseBody) {
   final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  List<User> temp = parsed.map<User>((json) => User.fromJson(json)).toList();
-  print(temp.toString());
+  List<User> temp = parsed.map<User>((json) => User.fromMap(json)).toList();
+  // print(temp.toString());
   return temp;
 }
 
@@ -61,16 +61,29 @@ class UserListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(users);
+    // print(users);
     return ListView.builder(
         itemCount: users.length,
         itemBuilder: (context, index) {
-          return Row(
-            children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(users[index].avatar!),
-              )
-            ],
+          return Container(
+            padding: EdgeInsets.all(16),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(users[index].avatar ?? ""),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Text(
+                    users[index].name ?? "",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )
+              ],
+            ),
           );
         });
   }
