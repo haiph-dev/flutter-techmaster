@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'cardGame/cardPage.dart';
 import 'gridview/chess.dart';
 import 'listview/listViewBook.dart';
 import 'listview/listViewDemo.dart';
@@ -45,6 +46,6 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ChessGridView();
+    return const CardGame();
   }
 }
