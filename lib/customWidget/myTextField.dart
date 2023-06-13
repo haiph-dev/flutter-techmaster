@@ -7,7 +7,7 @@ class myTextField extends StatelessWidget {
   final TextInputType textInputType;
   final TextCapitalization? textCapitalization;
   final Widget? suffixIcon;
-  final bool obscureText;
+  final bool? obscureText;
 
   const myTextField(
       {super.key,
@@ -17,7 +17,7 @@ class myTextField extends StatelessWidget {
       required this.textInputType,
       required this.textCapitalization,
       this.suffixIcon,
-      required this.obscureText});
+      this.obscureText});
 
   @override
   Widget build(BuildContext context) {
