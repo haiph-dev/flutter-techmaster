@@ -6,7 +6,7 @@ class Item {
   final String type;
   String? photo;
   bool isFlip = false;
-  bool isMatch = false;
+  // bool isMatch = false;
 
   Item(this.type);
 
@@ -40,6 +40,7 @@ class CardGame extends StatelessWidget {
 
 class CardGameView extends StatefulWidget {
   List<Item> cardList = Item.getLevel1();
+
   CardGameView({super.key});
 
   @override
@@ -47,34 +48,32 @@ class CardGameView extends StatefulWidget {
 }
 
 class _CardGameViewState extends State<CardGameView> {
-  int flipCount = 0;
-
-  void checkMatch() async {
-    for (int i = 0; i < widget.cardList.length - 1; i++) {
-      for (int j = i + 1; j < widget.cardList.length; j++) {
-        if (widget.cardList[i].isFlip &&
-            widget.cardList[j].isFlip &&
-            widget.cardList[i].type == widget.cardList[j].type) {
-          widget.cardList[i].isMatch = true;
-          widget.cardList[j].isMatch = true;
-        }
-      }
-    }
-    for (int i = 0; i < widget.cardList.length; i++) {
-      widget.cardList[i].isFlip = false;
-    }
-    flipCount = 0;
-    // sleep(const Duration(seconds: 1));
-    await Future.delayed(const Duration(seconds: 2)).then((_) {
-      setState(() {});
-    });
-  }
+  int lastFlip = -1;
+  bool flipable = true;
 
   void updateCardFlip(int index) async {
+    if (flipable == false) return;
     widget.cardList[index].isFlip = true;
-    flipCount++;
+    print('index: $index : ${widget.cardList[index].type}');
     setState(() {});
-    if (flipCount == 2) checkMatch();
+
+    if (lastFlip > -1) {
+      if (widget.cardList[index].type != widget.cardList[lastFlip].type) {
+        widget.cardList[index].isFlip = false;
+        widget.cardList[lastFlip].isFlip = false;
+        flipable = false;
+        await Future.delayed(Duration(seconds: 2), () {
+          setState(() {});
+        });
+
+        flipable = true;
+      }
+      lastFlip = -1;
+      print('lastFlip: $lastFlip');
+    } else {
+      lastFlip = index;
+      print('lastFlip: $lastFlip');
+    }
   }
 
   @override
@@ -86,7 +85,7 @@ class _CardGameViewState extends State<CardGameView> {
           children: List.generate(
             widget.cardList.length,
             (index) => GestureDetector(
-              onTap: () => updateCardFlip(index),
+              onTap: () => {updateCardFlip(index)},
               child: Container(
                 margin: EdgeInsets.all(8),
                 decoration: BoxDecoration(
@@ -94,8 +93,7 @@ class _CardGameViewState extends State<CardGameView> {
                     color: Colors.blue),
                 child: Center(
                     child: Text(
-                  widget.cardList[index].isMatch ||
-                          widget.cardList[index].isFlip
+                  widget.cardList[index].isFlip
                       ? widget.cardList[index].type
                       : '?',
                   style: const TextStyle(fontSize: 50),
