@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_techmaster/navigator/loginPage.dart';
 import 'cardGame/cardPage.dart';
 
 void main() {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
               backgroundColor: Colors.blue,
               titleTextStyle: TextStyle(fontSize: 25, color: Colors.white))),
-      home: const MyPage(),
+      home: LoginPage(),
     );
   }
 }
