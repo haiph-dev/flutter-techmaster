@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_techmaster/cardGame/item.dart';
 
 class Item {
   final String type;
@@ -78,29 +79,6 @@ class _CardGameViewState extends State<CardGameView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(10),
-        child: GridView.count(
-          crossAxisCount: 2,
-          children: List.generate(
-            widget.cardList.length,
-            (index) => GestureDetector(
-              onTap: () => {updateCardFlip(index)},
-              child: Container(
-                margin: EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.blue),
-                child: Center(
-                    child: Text(
-                  widget.cardList[index].isFlip
-                      ? widget.cardList[index].type
-                      : '?',
-                  style: const TextStyle(fontSize: 50),
-                )),
-              ),
-            ),
-          ),
-        ));
+    return Container(padding: const EdgeInsets.all(10), child: FrontCard());
   }
 }

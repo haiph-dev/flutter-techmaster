@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'cardGame/cardPage.dart';
-import 'gridview/chess.dart';
-import 'listview/listViewBook.dart';
-import 'listview/listViewDemo.dart';
+import 'cardGame/item.dart';
 
 void main() {
   runApp(const MyApp());
