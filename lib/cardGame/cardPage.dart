@@ -52,19 +52,15 @@ class _CardGameViewState extends State<CardGameView> {
       return;
     }
 
-    //count how many card still not flip and same type with last flip
-
-    int countExistCard =
-        cards.where((e) => e.isFlip == false && e.type == lastFlip).length;
-    print('countExistCard: $countExistCard');
-
-    if (justFlip.type == lastFlip || lastFlip == '') {
-      //just flip correct or flip first of type
+    int countExistNotFlip =
+        cards.where((e) => e.type == lastFlip && e.isFlip == false).length;
+    if (justFlip.type == lastFlip || countExistNotFlip == 0) {
+      //flip correct means justFlip has the same type with lastFlip, or all of lastType had been flipped and flip new type
       justFlip.isFlip = true;
       lastFlip = justFlip.type;
-      setState(() {});
     } else {
-      //just flip incorrect, delay 1s and flip all same type
+      //flip wrong type keep card for 1s then flip all cards
+      justFlip.isFlip = true;
       flipable = false;
       lastFlip = '';
       Future.delayed(const Duration(seconds: 1), () {
@@ -75,5 +71,7 @@ class _CardGameViewState extends State<CardGameView> {
         setState(() {});
       });
     }
+
+    setState(() {});
   }
 }

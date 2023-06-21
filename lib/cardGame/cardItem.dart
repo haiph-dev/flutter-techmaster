@@ -16,6 +16,7 @@ class CardItem {
     cards.add(CardItem('saur', 'lib/cardGame/images/venusaur.png'));
     cards.add(CardItem('turle', 'lib/cardGame/images/blastoise.png'));
     cards.add(CardItem('turle', 'lib/cardGame/images/squirtle.png'));
+    cards.shuffle();
 
     return cards;
   }
