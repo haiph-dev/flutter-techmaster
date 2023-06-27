@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'package:flutter_techmaster/navigator/loginPage.dart';
-// import 'cardGame/cardPage.dart';
+import 'cardGame/cardPage.dart';
 import 'datePicker/pickerPage.dart';
 
 void main() {
@@ -42,6 +42,6 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ViewDatePicker();
+    return const CardGame();
   }
 }
