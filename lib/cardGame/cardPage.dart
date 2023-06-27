@@ -8,6 +8,7 @@ class CardGame extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: const Text('Card Game'),
         ),
         body: CardGameView());
@@ -22,16 +23,49 @@ class CardGameView extends StatefulWidget {
 }
 
 class _CardGameViewState extends State<CardGameView> {
-  List<CardItem> cards = CardItem.getLevel1();
+  // List<CardItem> cards = CardItem.getLevel1();
+  late List<CardItem> cards;
   bool flipable = true;
   String lastFlip = '';
+  bool gameover = true;
+  late int noCardsInLine;
 
   @override
   Widget build(BuildContext context) {
+    if (gameover == true) {
+      return Container(
+        width: double.infinity,
+        color: Colors.lightBlue,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  cards = CardItem.getLevel1();
+                  noCardsInLine = 2;
+                  gameover = false;
+                  setState(() {});
+                },
+                child: const Text('Level 1 (2x3)')),
+            ElevatedButton(
+                onPressed: () {
+                  cards = CardItem.getLevel2();
+                  noCardsInLine = 3;
+                  gameover = false;
+                  setState(() {});
+                },
+                child: const Text('Level 2 (3x3)'))
+          ],
+        ),
+      );
+    }
     return GridView.builder(
         padding: const EdgeInsets.all(10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: noCardsInLine,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10),
         itemCount: cards.length,
         itemBuilder: (BuildContext context, int index) {
           final card = cards[index];
@@ -46,6 +80,17 @@ class _CardGameViewState extends State<CardGameView> {
   }
 
   void onTapCallback(CardItem justFlip) {
+    //check if all flip -> gameover
+    int countFlip = cards.where((e) => e.isFlip == false).length;
+    print('countFlip: $countFlip');
+    if (countFlip == 1) {
+      Future.delayed(const Duration(seconds: 1), () {
+        setState(() {
+          gameover = true;
+        });
+      });
+    }
+
     //not flipable cause still in wrong flip delay
     if (!flipable) {
       print('flipable: $flipable');

@@ -20,6 +20,23 @@ class CardItem {
 
     return cards;
   }
+
+  static List<CardItem> getLevel2() {
+    final cards = <CardItem>[];
+    cards.add(CardItem('dragon', 'lib/cardGame/images/chameleon.png'));
+    cards.add(CardItem('dragon', 'lib/cardGame/images/charizard.png'));
+    cards.add(CardItem('dragon', 'lib/cardGame/images/charmander.png'));
+    cards.add(CardItem('saur', 'lib/cardGame/images/bulbasaur.png'));
+    cards.add(CardItem('saur', 'lib/cardGame/images/venusaur.png'));
+    cards.add(CardItem('saur', 'lib/cardGame/images/ivysaur.png'));
+    cards.add(CardItem('turle', 'lib/cardGame/images/blastoise.png'));
+    cards.add(CardItem('turle', 'lib/cardGame/images/squirtle.png'));
+    cards.add(CardItem('turle', 'lib/cardGame/images/wartortle.png'));
+
+    cards.shuffle();
+
+    return cards;
+  }
 }
 
 class FrontCard extends StatelessWidget {
